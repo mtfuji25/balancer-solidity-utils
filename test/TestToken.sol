@@ -14,24 +14,20 @@
 
 pragma solidity ^0.7.0;
 
-/**
- * @dev Interface for the TemporarilyPausable helper.
- */
-interface ITemporarilyPausable {
-    /**
-     * @dev Emitted every time the pause state changes by `_setPaused`.
-     */
-    event PausedStateChanged(bool paused);
+import "../openzeppelin/ERC20Burnable.sol";
+import "../openzeppelin/ERC20Permit.sol";
+import "../openzeppelin/ERC20.sol";
 
-    /**
-     * @dev Returns the current paused state.
-     */
-    function getPausedState()
-        external
-        view
-        returns (
-            bool paused,
-            uint256 pauseWindowEndTime,
-            uint256 bufferPeriodEndTime
-        );
+contract TestToken is ERC20, ERC20Burnable, ERC20Permit {
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint8 decimals
+    ) ERC20(name, symbol) ERC20Permit(name) {
+        _setupDecimals(decimals);
+    }
+
+    function mint(address recipient, uint256 amount) external {
+        _mint(recipient, amount);
+    }
 }
