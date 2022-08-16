@@ -14,10 +14,17 @@
 
 pragma solidity ^0.7.0;
 
-import "../helpers/BalancerErrors.sol";
+/**
+ * @dev Interface for the SignatureValidator helper, used to support meta-transactions.
+ */
+interface ISignaturesValidator {
+    /**
+     * @dev Returns the EIP712 domain separator.
+     */
+    function getDomainSeparator() external view returns (bytes32);
 
-contract BalancerErrorsMock {
-    function fail(uint256 code) external pure {
-        _revert(code);
-    }
+    /**
+     * @dev Returns the next nonce used by an address to sign messages.
+     */
+    function getNextNonce(address user) external view returns (uint256);
 }

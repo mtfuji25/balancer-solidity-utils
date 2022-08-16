@@ -14,10 +14,24 @@
 
 pragma solidity ^0.7.0;
 
-import "../helpers/BalancerErrors.sol";
+/**
+ * @dev Interface for the TemporarilyPausable helper.
+ */
+interface ITemporarilyPausable {
+    /**
+     * @dev Emitted every time the pause state changes by `_setPaused`.
+     */
+    event PausedStateChanged(bool paused);
 
-contract BalancerErrorsMock {
-    function fail(uint256 code) external pure {
-        _revert(code);
-    }
+    /**
+     * @dev Returns the current paused state.
+     */
+    function getPausedState()
+        external
+        view
+        returns (
+            bool paused,
+            uint256 pauseWindowEndTime,
+            uint256 bufferPeriodEndTime
+        );
 }

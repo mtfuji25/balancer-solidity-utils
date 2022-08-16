@@ -14,8 +14,8 @@
 
 pragma solidity ^0.7.0;
 
-import "@balancer-labs/v2-interfaces/contracts/solidity-utils/helpers/BalancerErrors.sol";
-import "@balancer-labs/v2-interfaces/contracts/solidity-utils/helpers/IAuthentication.sol";
+import "./BalancerErrors.sol";
+import "./IAuthentication.sol";
 
 /**
  * @dev Building block for performing access control on external functions.

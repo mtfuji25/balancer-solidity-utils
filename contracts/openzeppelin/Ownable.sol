@@ -5,7 +5,7 @@
 
 pragma solidity ^0.7.0;
 
-import "@balancer-labs/v2-interfaces/contracts/solidity-utils/helpers/BalancerErrors.sol";
+import "../helpers/BalancerErrors.sol";
 
 /**
  * @dev Contract module which provides a basic access control mechanism, where
@@ -28,7 +28,8 @@ abstract contract Ownable {
      * @dev Initializes the contract setting the deployer as the initial owner.
      */
     constructor() {
-        _transferOwnership(msg.sender);
+        _owner = msg.sender;
+        emit OwnershipTransferred(address(0), msg.sender);
     }
 
     /**
@@ -54,7 +55,8 @@ abstract contract Ownable {
      * thereby removing any functionality that is only available to the owner.
      */
     function renounceOwnership() public virtual onlyOwner {
-        _transferOwnership(address(0));
+        emit OwnershipTransferred(_owner, address(0));
+        _owner = address(0);
     }
 
     /**
@@ -63,16 +65,7 @@ abstract contract Ownable {
      */
     function transferOwnership(address newOwner) public virtual onlyOwner {
         _require(newOwner != address(0), Errors.NEW_OWNER_IS_ZERO);
-        _transferOwnership(newOwner);
-    }
-
-    /**
-     * @dev Transfers ownership of the contract to a new account (`newOwner`).
-     * Internal function without access restriction.
-     */
-    function _transferOwnership(address newOwner) internal virtual {
-        address oldOwner = _owner;
+        emit OwnershipTransferred(_owner, newOwner);
         _owner = newOwner;
-        emit OwnershipTransferred(oldOwner, newOwner);
     }
 }

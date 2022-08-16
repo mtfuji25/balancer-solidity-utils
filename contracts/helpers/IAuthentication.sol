@@ -14,10 +14,9 @@
 
 pragma solidity ^0.7.0;
 
-import "../helpers/BalancerErrors.sol";
-
-contract BalancerErrorsMock {
-    function fail(uint256 code) external pure {
-        _revert(code);
-    }
+interface IAuthentication {
+    /**
+     * @dev Returns the action identifier associated with the external function described by `selector`.
+     */
+    function getActionId(bytes4 selector) external view returns (bytes32);
 }

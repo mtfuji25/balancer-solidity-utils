@@ -108,7 +108,7 @@ describe('ERC20Permit', () => {
           ({ v, r, s, deadline } = await signPermit(token, holder, spender, amount, now.sub(1)));
         });
 
-        itRevertsWithInvalidSignature('EXPIRED_SIGNATURE');
+        itRevertsWithInvalidSignature('EXPIRED_PERMIT');
       });
 
       function itRevertsWithInvalidSignature(reason?: string) {

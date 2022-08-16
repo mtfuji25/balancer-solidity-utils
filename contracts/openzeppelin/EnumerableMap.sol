@@ -11,8 +11,9 @@
 
 pragma solidity ^0.7.0;
 
-import "@balancer-labs/v2-interfaces/contracts/solidity-utils/helpers/BalancerErrors.sol";
-import "@balancer-labs/v2-interfaces/contracts/solidity-utils/openzeppelin/IERC20.sol";
+import "./IERC20.sol";
+
+import "../helpers/BalancerErrors.sol";
 
 /**
  * @dev Library for managing an enumerable variant of Solidity's
@@ -41,8 +42,6 @@ library EnumerableMap {
     // one of these - there'll otherwise be duplicated code).
 
     // IERC20ToBytes32Map
-
-    // solhint-disable func-name-mixedcase
 
     struct IERC20ToBytes32MapEntry {
         IERC20 _key;

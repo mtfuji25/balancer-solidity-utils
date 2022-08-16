@@ -14,8 +14,8 @@
 
 pragma solidity ^0.7.0;
 
-import "@balancer-labs/v2-interfaces/contracts/solidity-utils/helpers/BalancerErrors.sol";
-import "@balancer-labs/v2-interfaces/contracts/solidity-utils/helpers/ITemporarilyPausable.sol";
+import "./BalancerErrors.sol";
+import "./ITemporarilyPausable.sol";
 
 /**
  * @dev Allows for a contract to be paused during an initial period after deployment, disabling functionality. Can be
@@ -104,13 +104,6 @@ abstract contract TemporarilyPausable is ITemporarilyPausable {
      */
     function _ensureNotPaused() internal view {
         _require(_isNotPaused(), Errors.PAUSED);
-    }
-
-    /**
-     * @dev Reverts if the contract is not paused.
-     */
-    function _ensurePaused() internal view {
-        _require(!_isNotPaused(), Errors.NOT_PAUSED);
     }
 
     /**
